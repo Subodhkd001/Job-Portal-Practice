@@ -1,11 +1,17 @@
 // imports
+// package import
 import express from 'express'
 import dotenv from 'dotenv'
 import morgan from 'morgan';
 import cors from 'cors';
 import 'express-async-errors';
+// security packages
+import helmet from 'helmet';
+import xss from 'xss-clean';
+import mongoSanitize from 'express-mongo-sanitize';
 
- 
+
+// files import
 import connectDB from './config/db.js'
 import testRoutes from './routes/testRoutes.js'
 import authRoutes from './routes/authRoutes.js'
@@ -31,6 +37,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors())
 app.use(morgan('dev'))
+app.use(helmet())
+app.use(xss())
+app.use(mongoSanitize())
+
+// testing
 
 
 
